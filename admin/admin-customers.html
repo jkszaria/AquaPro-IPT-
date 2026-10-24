@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro - Customers Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Admin Sidebar -->
+        <aside class="sidebar admin-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-water"></i>
+                <span>AquaPro Admin</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="admin.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+                    <li><a href="admin-orders.html"><i class="fas fa-clipboard-list"></i><span>Orders</span></a></li>
+                    <li><a href="delivery-management.html"><i class="fas fa-truck"></i><span>Deliveries</span></a></li>
+                    <li><a href="admin-drivers.html"><i class="fas fa-users"></i><span>Drivers</span></a></li>
+                    <li class="active"><a href="admin-customers.html"><i class="fas fa-address-book"></i><span>Customers</span></a></li>
+                    <li><a href="inventory.html"><i class="fas fa-boxes"></i><span>Inventory</span></a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i><span>Reports</span></a></li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                    <li class="logout-item"><a href="../login.html"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content admin-main">
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1>Customers Management</h1>
+                    <p>View and manage registered customers</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Customer
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filters -->
+            <div class="filters-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search customers...">
+                </div>
+                <select class="filter-select">
+                    <option value="">All Barangays</option>
+                    <option>Acacia</option>
+                    <option>Baybay</option>
+                    <option>Rizal</option>
+                    <option>Washington</option>
+                    <option>Cervantes</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">Sort by</option>
+                    <option value="name">Name</option>
+                    <option value="orders">Total Orders</option>
+                    <option value="date">Registration Date</option>
+                </select>
+            </div>
+
+            <!-- Customers Table -->
+            <div class="card">
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Customer ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Barangay</th>
+                                <th>Total Orders</th>
+                                <th>Subscription</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#C001</td>
+                                <td><strong>Juan Dela Cruz</strong></td>
+                                <td>juan@email.com</td>
+                                <td>0912-345-6789</td>
+                                <td>Acacia</td>
+                                <td>45</td>
+                                <td><span class="status-badge status-confirmed">Active</span></td>
+                                <td><span class="status-badge status-delivered">Active</span></td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn btn-sm btn-primary" title="View"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Order History"><i class="fas fa-history"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#C002</td>
+                                <td><strong>Maria Santos</strong></td>
+                                <td>maria@email.com</td>
+                                <td>0923-456-7890</td>
+                                <td>Baybay</td>
+                                <td>38</td>
+                                <td><span class="status-badge status-confirmed">Active</span></td>
+                                <td><span class="status-badge status-delivered">Active</span></td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn btn-sm btn-primary" title="View"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Order History"><i class="fas fa-history"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#C003</td>
+                                <td><strong>Pedro Reyes</strong></td>
+                                <td>pedro@email.com</td>
+                                <td>0934-567-8901</td>
+                                <td>Rizal</td>
+                                <td>12</td>
+                                <td><span class="status-badge status-cancelled">Inactive</span></td>
+                                <td><span class="status-badge status-pending">Inactive</span></td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn btn-sm btn-primary" title="View"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Order History"><i class="fas fa-history"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-pagination">
+                    <span>Showing 1-3 of 150 entries</span>
+                    <div class="pagination-buttons">
+                        <button class="btn btn-sm" disabled>Previous</button>
+                        <button class="btn btn-sm active">1</button>
+                        <button class="btn btn-sm">2</button>
+                        <button class="btn btn-sm">3</button>
+                        <button class="btn btn-sm">Next</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/store.js"></script>
+    <script src="../js/admin-people.js"></script>
+</body>
+</html>

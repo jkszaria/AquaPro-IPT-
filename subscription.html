@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro - Order Preferences</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/customer-orders.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Combined layout */
+        .order-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .order-summary-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: 24px;
+        }
+
+        .order-summary-sidebar .card {
+            margin-bottom: 0;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* Modal Box */
+        .modal-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 520px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-box .modal-icon {
+            text-align: center;
+            font-size: 56px;
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .modal-box h2 {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a2b3c;
+            margin-bottom: 20px;
+        }
+
+        .modal-box .summary-block {
+            background: #f7f9fc;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+        }
+
+        .modal-box .summary-block h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #5f6b7a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .modal-box .summary-block p {
+            font-size: 14px;
+            color: #3a4c5e;
+            margin: 3px 0;
+            line-height: 1.5;
+        }
+
+        .modal-box .summary-block strong {
+            color: #1a2b3c;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .modal-actions .btn {
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .modal-actions .btn-primary {
+            background: #0066cc;
+            color: white;
+        }
+
+        .modal-actions .btn-primary:hover {
+            background: #0052a3;
+        }
+
+        .modal-actions .btn-outline {
+            background: white;
+            color: #3a4c5e;
+            border: 2px solid #d0d9e4;
+        }
+
+        .modal-actions .btn-outline:hover {
+            background: #f0f5ff;
+            border-color: #0066cc;
+        }
+
+        /* Delivery preference option */
+        .delivery-preference-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: #f8fafd;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 2px solid #e9eff4;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .delivery-preference-option:hover {
+            border-color: #0066cc;
+        }
+
+        .delivery-preference-option:has(input:checked) {
+            border-color: #0066cc;
+            background: #e6f2ff;
+        }
+
+        /* Frequency options */
+        .freq-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border: 2px solid #dce3eb;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .freq-option:hover {
+            border-color: #0066cc;
+        }
+
+        .freq-option:has(input:checked) {
+            border-color: #0066cc;
+            background: #e6f2ff;
+        }
+
+        /* Day checkboxes */
+        .day-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border: 2px solid #dce3eb;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .day-chip:has(input:checked) {
+            border-color: #0066cc;
+            background: #e6f2ff;
+            color: #0066cc;
+        }
+
+        /* Card header with icon on right */
+        .card-header.icon-right {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-header.icon-right h3 {
+            order: 1;
+        }
+
+        .card-header.icon-right i {
+            order: 2;
+            margin-left: auto;
+        }
+
+        @media (max-width: 992px) {
+            .order-container {
+                grid-template-columns: 1fr;
+            }
+            .order-summary-sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-water"></i>
+                <span>AquaPro</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+                    <li><a href="order.html"><i class="fas fa-shopping-cart"></i><span>Place Order</span></a></li>
+                    <li class="active"><a href="subscription.html"><i class="fas fa-sliders-h"></i><span>Order Preferences</span></a></li>
+                    <li><a href="tracking.html"><i class="fas fa-truck"></i><span>Track Delivery</span></a></li>
+                    <li><a href="order-history.html"><i class="fas fa-history"></i><span>Order History</span></a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i><span>My Profile</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a class="logout-btn" href="login.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Order Preferences</h1>
+                    <p>Select products, schedule delivery & set your preferences</p>
+                </div>
+            </header>
+
+            <div class="order-container">
+                <!-- Left Column -->
+                <div class="order-products">
+                    <!-- Products -->
+                    <div class="card">
+                        <!-- CHANGED: Icon now on the RIGHT side of the title -->
+                        <div class="card-header icon-right">
+                            <h3>1. Select Products</h3>
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-grid">
+                                <div class="product-card">
+                                    <div class="product-image"><i class="fas fa-wine-bottle"></i></div>
+                                    <div class="product-info">
+                                        <h3>Slim Container</h3>
+                                        <p class="product-desc">Compact 3-gallon slim container</p>
+                                        <p class="product-price">₱25.00</p>
+                                        <div class="quantity-selector">
+                                            <button class="qty-btn minus" onclick="changeQty('slim', -1)">−</button>
+                                            <input type="number" id="qty-slim" value="1" min="0" max="10" class="qty-input" readonly>
+                                            <button class="qty-btn plus" onclick="changeQty('slim', 1)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-card">
+                                    <div class="product-image"><i class="fas fa-droplet"></i></div>
+                                    <div class="product-info">
+                                        <h3>Round Container</h3>
+                                        <p class="product-desc">Standard 4-gallon round container</p>
+                                        <p class="product-price">₱30.00</p>
+                                        <div class="quantity-selector">
+                                            <button class="qty-btn minus" onclick="changeQty('round', -1)">−</button>
+                                            <input type="number" id="qty-round" value="0" min="0" max="10" class="qty-input" readonly>
+                                            <button class="qty-btn plus" onclick="changeQty('round', 1)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-card">
+                                    <div class="product-image"><i class="fas fa-wine-bottle"></i></div>
+                                    <div class="product-info">
+                                        <h3>5-Gallon Bottle</h3>
+                                        <p class="product-desc">Large 5-gallon bottle</p>
+                                        <p class="product-price">₱35.00</p>
+                                        <div class="quantity-selector">
+                                            <button class="qty-btn minus" onclick="changeQty('bottle', -1)">−</button>
+                                            <input type="number" id="qty-bottle" value="0" min="0" max="10" class="qty-input" readonly>
+                                            <button class="qty-btn plus" onclick="changeQty('bottle', 1)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Schedule -->
+                    <div class="card delivery-schedule" style="margin-bottom: 0;">
+                        <!-- Icon stays on LEFT for Schedule Delivery -->
+                        <div class="card-header">
+                            <i class="fas fa-calendar-check"></i>
+                            <h3>2. Schedule Delivery</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="schedule-grid">
+                                <div class="schedule-item">
+                                    <label>Delivery Date</label>
+                                    <input type="date" id="delivery-date" class="date-picker">
+                                </div>
+                                <div class="schedule-item">
+                                    <label>Time Slot</label>
+                                    <select id="time-slot" class="time-slot-select">
+                                        <option value="morning">Morning (8:00 AM - 12:00 PM)</option>
+                                        <option value="afternoon">Afternoon (12:00 PM - 5:00 PM)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Instructions -->
+                    <div class="card special-instructions" style="margin-bottom: 0;">
+                        <!-- Icon stays on LEFT for Special Instructions -->
+                        <div class="card-header">
+                            <i class="fas fa-comment-alt"></i>
+                            <h3>Special Instructions (Optional)</h3>
+                        </div>
+                        <div class="card-body">
+                            <textarea id="instructions" rows="3" placeholder="E.g., Leave at the gate, call before arriving, etc."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="order-summary-sidebar">
+                    <!-- Preferences -->
+                    <div class="card">
+                        <!-- CHANGED: Icon now on the RIGHT side of the title -->
+                        <div class="card-header icon-right">
+                            <h3>3. Delivery Preferences</h3>
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <div class="card-body">
+                            <label class="delivery-preference-option">
+                                <input type="radio" name="deliveryPreference" value="one-time" checked style="margin-top: 3px;">
+                                <div style="flex:1;">
+                                    <div style="font-weight:600; color:#1a2b3c; margin-bottom:4px;">📋 One-Time Order</div>
+                                    <span style="font-size:13px; color:#5f6b7a;">Place this order only</span>
+                                </div>
+                            </label>
+                            <label class="delivery-preference-option">
+                                <input type="radio" name="deliveryPreference" value="scheduled" id="scheduledRadio" style="margin-top: 3px;">
+                                <div style="flex:1;">
+                                    <div style="font-weight:600; color:#1a2b3c; margin-bottom:4px;">🔄 Scheduled Delivery</div>
+                                    <span style="font-size:13px; color:#5f6b7a;">Repeat this order automatically</span>
+                                </div>
+                            </label>
+
+                            <div id="frequencySection" style="display:none; padding:12px 0;">
+                                <label style="font-weight:600; font-size:14px; color:#3a4c5e; display:block; margin-bottom:8px;">Frequency</label>
+                                <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+                                    <label class="freq-option"><input type="radio" name="frequency" value="weekly" checked> Weekly</label>
+                                    <label class="freq-option"><input type="radio" name="frequency" value="biweekly"> Every 2 weeks</label>
+                                    <label class="freq-option"><input type="radio" name="frequency" value="monthly"> Monthly</label>
+                                    <label class="freq-option"><input type="radio" name="frequency" value="custom" id="customFreqRadio"> Custom</label>
+                                </div>
+                                <div id="customDaysGroup" style="display:none; margin-top:8px;">
+                                    <label style="font-weight:600; font-size:13px; color:#3a4c5e; display:block; margin-bottom:6px;">Select Days</label>
+                                    <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                                        <label class="day-chip"><input type="checkbox" checked> Mon</label>
+                                        <label class="day-chip"><input type="checkbox"> Tue</label>
+                                        <label class="day-chip"><input type="checkbox"> Wed</label>
+                                        <label class="day-chip"><input type="checkbox" checked> Thu</label>
+                                        <label class="day-chip"><input type="checkbox"> Fri</label>
+                                        <label class="day-chip"><input type="checkbox"> Sat</label>
+                                        <label class="day-chip"><input type="checkbox"> Sun</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr style="margin:16px 0; border:0.5px solid #e2e8f0;">
+
+                            <div style="background:#f8fafd; padding:14px; border-radius:12px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                                <div style="display:flex; align-items:center; gap:10px;">
+                                    <i class="fas fa-bell" style="color:#0066cc;"></i>
+                                    <span style="font-weight:600; font-size:14px; color:#1a2b3c;">Reorder Reminder</span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="reminderToggle" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:6px;">
+                                    <span style="font-size:13px; color:#5f6b7a;">Notify after:</span>
+                                    <select id="reminderPreset" style="padding:6px 10px; border:2px solid #dce3eb; border-radius:10px; font-size:13px;">
+                                        <option value="7">7 days</option>
+                                        <option value="5">5 days</option>
+                                        <option value="10">10 days</option>
+                                        <option value="14">2 weeks</option>
+                                        <option value="30">1 month</option>
+                                        <option value="custom">✨ Custom</option>
+                                    </select>
+                                    <div id="customReminderGroup" style="display:none; align-items:center; gap:4px;">
+                                        <input type="number" id="customReminderValue" value="3" min="1" max="365" style="width:50px; padding:6px; text-align:center; border:2px solid #dce3eb; border-radius:10px; font-size:13px;">
+                                        <select id="customReminderUnit" style="padding:6px; border:2px solid #dce3eb; border-radius:10px; font-size:13px;">
+                                            <option value="days">Days</option>
+                                            <option value="weeks">Weeks</option>
+                                            <option value="months">Months</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="order-summary">
+                        <h2>Order Summary</h2>
+                        <div class="summary-items" id="summary-items">
+                            <p class="empty-cart">No items selected yet</p>
+                        </div>
+                        <div class="summary-totals">
+                            <div class="summary-row"><span>Subtotal</span><span id="subtotal">₱0.00</span></div>
+                            <div class="summary-row"><span>Delivery Fee</span><span id="delivery-fee">₱20.00</span></div>
+                            <div class="summary-row total"><span>Total</span><span id="total">₱20.00</span></div>
+                        </div>
+                        <button class="btn btn-primary btn-full" id="place-order-btn" onclick="placeOrder()">
+                            <i class="fas fa-shopping-cart"></i> Place Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-box">
+            <div class="modal-icon">✅</div>
+            <h2>Order Placed Successfully!</h2>
+            <div id="modalContent"></div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="closeModal()">OK</button>
+                <button class="btn btn-outline" onclick="window.location.href='tracking.html'">Track Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/store.js"></script>
+    <script src="js/subscription.js"></script>
+</body>
+</html>

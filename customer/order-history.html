@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro - Order History</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/customer-orders.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-water"></i>
+                <span>AquaPro</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="../dashboard.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+                    <li><a href="../order.html"><i class="fas fa-shopping-cart"></i><span>Place Order</span></a></li>
+                    <li><a href="../subscription.html"><i class="fas fa-sync-alt"></i><span>Order Preferences</span></a></li>
+                    <li><a href="../tracking.html"><i class="fas fa-truck"></i><span>Track Delivery</span></a></li>
+                    <li class="active"><a href="order-history.html"><i class="fas fa-history"></i><span>Order History</span></a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i><span>My Profile</span></a></li>
+                    <li class="logout-item"><a href="../login.html" id="logout-link"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Order History</h1>
+                    <p>View all your past water deliveries</p>
+                </div>
+                <div class="header-right">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">2</span>
+                    </div>
+                    <div class="user-avatar">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%233b82f6'/%3E%3Ctext x='20' y='26' text-anchor='middle' fill='white' font-size='16'%3EJD%3C/text%3E%3C/svg%3E" alt="User">
+                    </div>
+                </div>
+            </header>
+
+            <div class="order-history-container">
+                <!-- Filters -->
+                <div class="history-filters">
+                    <select id="status-filter">
+                        <option value="">All Status</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    <select id="month-filter">
+                        <option value="">All Months</option>
+                        <option value="4">April 2024</option>
+                        <option value="3">March 2024</option>
+                        <option value="2">February 2024</option>
+                    </select>
+                    <input type="text" id="search-history" placeholder="Search by Order ID...">
+                    <button class="btn btn-outline" id="clear-filters">
+                        <i class="fas fa-times"></i> Clear Filters
+                    </button>
+                </div>
+
+                <!-- Order History List -->
+                <div class="order-history-list" id="order-history-list">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination">
+                    <button class="btn btn-sm" disabled><i class="fas fa-chevron-left"></i></button>
+                    <button class="btn btn-sm active">1</button>
+                    <button class="btn btn-sm">2</button>
+                    <button class="btn btn-sm">3</button>
+                    <button class="btn btn-sm"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-history" id="empty-history" style="display:none;">
+                    <i class="fas fa-inbox"></i>
+                    <p>No orders found matching your filters</p>
+                    <button class="btn btn-primary" onclick="window.location.href='../order.html'">
+                        <i class="fas fa-shopping-cart"></i> Place an Order
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/store.js"></script>
+    <script src="../js/customer-pages.js"></script>
+</body>
+</html>

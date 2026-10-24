@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro - Place an Order</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/customer-orders.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header"><i class="fas fa-water"></i><span>AquaPro</span></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+                    <li class="active"><a href="order.html"><i class="fas fa-shopping-cart"></i><span>Place Order</span></a></li>
+                    <li><a href="subscription.html"><i class="fas fa-sync-alt"></i><span>Order Preferences</span></a></li>
+                    <li><a href="tracking.html"><i class="fas fa-truck"></i><span>Track Delivery</span></a></li>
+                    <li><a href="order-history.html"><i class="fas fa-history"></i><span>Order History</span></a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i><span>My Profile</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left"><h1>Place an Order</h1><p>Choose your water products and delivery time.</p></div>
+            </header>
+            <div class="order-container">
+                <div class="order-products">
+                    <div class="card">
+                        <div class="card-header"><h3>Select Products</h3></div>
+                        <div class="card-body product-grid">
+                            <div class="product-card"><div class="product-info"><h3>Slim Container</h3><p class="product-desc">3-gallon container</p><p class="product-price">₱25.00</p><div class="quantity-selector"><button type="button" class="qty-btn" data-product="slim" data-delta="-1">−</button><input class="qty-input" id="qty-slim" type="number" min="0" max="10" value="0"><button type="button" class="qty-btn" data-product="slim" data-delta="1">+</button></div></div></div>
+                            <div class="product-card"><div class="product-info"><h3>Round Container</h3><p class="product-desc">4-gallon container</p><p class="product-price">₱30.00</p><div class="quantity-selector"><button type="button" class="qty-btn" data-product="round" data-delta="-1">−</button><input class="qty-input" id="qty-round" type="number" min="0" max="10" value="0"><button type="button" class="qty-btn" data-product="round" data-delta="1">+</button></div></div></div>
+                            <div class="product-card"><div class="product-info"><h3>5-Gallon Bottle</h3><p class="product-desc">Large 5-gallon bottle</p><p class="product-price">₱35.00</p><div class="quantity-selector"><button type="button" class="qty-btn" data-product="bottle" data-delta="-1">−</button><input class="qty-input" id="qty-bottle" type="number" min="0" max="10" value="0"><button type="button" class="qty-btn" data-product="bottle" data-delta="1">+</button></div></div></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><h3>Schedule Delivery</h3></div>
+                        <div class="card-body schedule-grid">
+                            <label>Delivery Date<input type="date" id="delivery-date" required></label>
+                            <label>Time Slot<select id="time-slot"><option value="morning">Morning (8:00 AM - 12:00 PM)</option><option value="afternoon">Afternoon (12:00 PM - 5:00 PM)</option></select></label>
+                            <label class="full-width">Special Instructions<textarea id="instructions" rows="3" maxlength="300" placeholder="Optional delivery instructions"></textarea></label>
+                        </div>
+                    </div>
+                </div>
+                <aside class="order-summary-sidebar">
+                    <div class="card">
+                        <div class="card-header"><h3>Order Summary</h3></div>
+                        <div class="card-body">
+                            <div id="summary-items"><p class="empty-cart">No items selected yet</p></div>
+                            <div class="summary-totals">
+                                <div class="summary-row"><span>Subtotal</span><span id="subtotal">₱0.00</span></div>
+                                <div class="summary-row"><span>Delivery Fee</span><span id="delivery-fee">₱0.00</span></div>
+                                <div class="summary-row total"><strong>Total</strong><strong id="total">₱0.00</strong></div>
+                            </div>
+                            <button class="btn btn-primary btn-full" id="place-order-btn" disabled>Place Order</button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+    <script src="js/store.js"></script>
+    <script src="js/order.js"></script>
+</body>
+</html>

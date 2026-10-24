@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro - Delivery Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/delivery-management.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Admin Sidebar -->
+        <aside class="sidebar admin-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-water"></i>
+                <span>AquaPro Admin</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="admin.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+                    <li><a href="admin-orders.html"><i class="fas fa-clipboard-list"></i><span>Orders</span></a></li>
+                    <li class="active"><a href="delivery-management.html"><i class="fas fa-truck"></i><span>Deliveries</span></a></li>
+                    <li><a href="admin-drivers.html"><i class="fas fa-users"></i><span>Drivers</span></a></li>
+                    <li><a href="admin-customers.html"><i class="fas fa-address-book"></i><span>Customers</span></a></li>
+                    <li><a href="inventory.html"><i class="fas fa-boxes"></i><span>Inventory</span></a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i><span>Reports</span></a></li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                    <li class="logout-item"><a href="../login.html"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content admin-main">
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1>Delivery Management</h1>
+                    <p>Assign drivers and manage deliveries</p>
+                </div>
+                <div class="header-right">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="delivery-management">
+                <!-- Map Overview -->
+                <div class="card map-overview">
+                    <div class="map-placeholder">
+                        <div class="map-pins">
+                            <div class="map-pin" style="top: 20%; left: 30%;" title="Brgy. Acacia - Juan Dela Cruz">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="pin-label">Acacia</span>
+                            </div>
+                            <div class="map-pin" style="top: 45%; left: 60%;" title="Brgy. Baybay - Maria Santos">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="pin-label">Baybay</span>
+                            </div>
+                            <div class="map-pin" style="top: 30%; left: 75%;" title="Brgy. Rizal - Pedro Reyes">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="pin-label">Rizal</span>
+                            </div>
+                            <div class="map-pin" style="top: 60%; left: 40%;" title="Brgy. Washington - Ana Cruz">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="pin-label">Washington</span>
+                            </div>
+                            <div class="map-pin" style="top: 50%; left: 20%;" title="Station - Aqua Fresh">
+                                <i class="fas fa-warehouse"></i>
+                                <span class="pin-label">Station</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Two Column Layout -->
+                <div class="delivery-columns">
+                    <!-- Pending Deliveries -->
+                    <div class="card pending-deliveries">
+                        <div class="card-header">
+                            <h3><i class="fas fa-clock"></i> Pending Deliveries</h3>
+                            <span class="count-badge">12</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="order-card">
+                                <div class="order-info">
+                                    <strong>Juan Dela Cruz</strong>
+                                    <span class="address"><i class="fas fa-map-marker-alt"></i> Brgy. Acacia, Catarman</span>
+                                    <span class="items"><i class="fas fa-box"></i> 2 x 5-Gallon Bottles</span>
+                                    <span class="time"><i class="fas fa-clock"></i> Scheduled: Morning (8-12)</span>
+                                </div>
+                                <div class="assign-driver">
+                                    <select class="driver-select">
+                                        <option value="">Assign Driver...</option>
+                                        <option value="roberto">Roberto (Available)</option>
+                                        <option value="julius">Julius (Available)</option>
+                                        <option value="michael">Michael (Available)</option>
+                                    </select>
+                                    <button class="btn btn-primary btn-sm">Assign</button>
+                                </div>
+                            </div>
+                            <div class="order-card">
+                                <div class="order-info">
+                                    <strong>Maria Santos</strong>
+                                    <span class="address"><i class="fas fa-map-marker-alt"></i> Brgy. Baybay, Catarman</span>
+                                    <span class="items"><i class="fas fa-box"></i> 3 x Round Containers</span>
+                                    <span class="time"><i class="fas fa-clock"></i> Scheduled: Morning (8-12)</span>
+                                </div>
+                                <div class="assign-driver">
+                                    <select class="driver-select">
+                                        <option value="">Assign Driver...</option>
+                                        <option value="roberto">Roberto (Available)</option>
+                                        <option value="julius">Julius (Available)</option>
+                                    </select>
+                                    <button class="btn btn-primary btn-sm">Assign</button>
+                                </div>
+                            </div>
+                            <div class="order-card">
+                                <div class="order-info">
+                                    <strong>Pedro Reyes</strong>
+                                    <span class="address"><i class="fas fa-map-marker-alt"></i> Brgy. Rizal, Catarman</span>
+                                    <span class="items"><i class="fas fa-box"></i> 1 x 5-Gallon Bottle</span>
+                                    <span class="time"><i class="fas fa-clock"></i> Scheduled: Afternoon (12-5)</span>
+                                </div>
+                                <div class="assign-driver">
+                                    <select class="driver-select">
+                                        <option value="">Assign Driver...</option>
+                                        <option value="michael">Michael (Available)</option>
+                                    </select>
+                                    <button class="btn btn-primary btn-sm">Assign</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="right-column">
+                        <!-- Drivers Panel -->
+                        <div class="card drivers-panel">
+                            <div class="card-header">
+                                <h3><i class="fas fa-id-card"></i> Drivers</h3>
+                                <a href="admin-drivers.html" class="view-all">Manage Drivers</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="driver-card available">
+                                    <div class="driver-status">
+                                        <span class="status-dot green"></span>
+                                        <strong>Roberto Mendoza</strong>
+                                    </div>
+                                    <span class="status-text">Available</span>
+                                    <span class="delivery-count">0/5 deliveries</span>
+                                </div>
+                                <div class="driver-card available">
+                                    <div class="driver-status">
+                                        <span class="status-dot green"></span>
+                                        <strong>Julius Cruz</strong>
+                                    </div>
+                                    <span class="status-text">Available</span>
+                                    <span class="delivery-count">0/5 deliveries</span>
+                                </div>
+                                <div class="driver-card on-route">
+                                    <div class="driver-status">
+                                        <span class="status-dot orange"></span>
+                                        <strong>Michael Reyes</strong>
+                                    </div>
+                                    <span class="status-text">On Route</span>
+                                    <span class="delivery-count">3/5 deliveries</span>
+                                </div>
+                                <div class="driver-card off-duty">
+                                    <div class="driver-status">
+                                        <span class="status-dot gray"></span>
+                                        <strong>Eddie Garcia</strong>
+                                    </div>
+                                    <span class="status-text">Off Duty</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Assigned Deliveries -->
+                        <div class="card assigned-deliveries">
+                            <div class="card-header">
+                                <h3><i class="fas fa-check-circle"></i> Assigned Deliveries</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="assigned-order">
+                                    <span class="driver-name">Michael</span>
+                                    <div class="assigned-info">
+                                        <strong>Ana Cruz</strong>
+                                        <span>Brgy. Washington</span>
+                                        <span>2 x Slim Containers</span>
+                                        <span class="eta">ETA: 11:00 AM</span>
+                                    </div>
+                                </div>
+                                <div class="assigned-order">
+                                    <span class="driver-name">Michael</span>
+                                    <div class="assigned-info">
+                                        <strong>Jose Garcia</strong>
+                                        <span>Brgy. Cervantes</span>
+                                        <span>4 x 5-Gallon Bottles</span>
+                                        <span class="eta">ETA: 11:45 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/store.js"></script>
+    <script src="../js/delivery-management.js"></script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro - Customer Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/customer-orders.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+      <!-- Replace the sidebar section in dashboard.html -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <i class="fas fa-water"></i>
+        <span>AquaPro</span>
+    </div>
+    <nav class="sidebar-nav">
+        <ul>
+            <li class="active">
+                <a href="dashboard.html">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="order.html">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Place Order</span>
+                </a>
+            </li>
+           
+            <li>
+                <a href="subscription.html">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Order Preferences</span>
+                </a>
+            </li>
+            <li>
+                <a href="tracking.html">
+                    <i class="fas fa-truck"></i>
+                    <span>Track Delivery</span>
+                </a>
+            </li>
+            <li>
+                <a href="order-history.html">
+                    <i class="fas fa-history"></i>
+                    <span>Order History</span>
+                </a>
+            </li>
+            <li>
+                <a href="profile.html">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="sidebar-footer">
+        <a class="logout-btn" href="login.html">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Welcome back, <span id="customer-name">Juan</span>!</h1>
+                    <p>Here's your water delivery summary</p>
+                </div>
+                <div class="header-right">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                        <div class="notification-dropdown">
+                            <div class="notification-item">
+                                <i class="fas fa-truck"></i>
+                                <p>Your delivery is on the way!</p>
+                                <small>5 minutes ago</small>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Order #1005 confirmed</p>
+                                <small>2 hours ago</small>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-sync"></i>
+                                <p>Subscription auto-refill scheduled</p>
+                                <small>1 day ago</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-avatar">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%233b82f6'/%3E%3Ctext x='20' y='26' text-anchor='middle' fill='white' font-size='16'%3EJD%3C/text%3E%3C/svg%3E" alt="User">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Summary Cards -->
+                <div class="summary-cards">
+                    <div class="card next-delivery-card">
+                        <div class="card-header">
+                            <i class="fas fa-calendar-check"></i>
+                            <h3>Next Scheduled Delivery</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="delivery-date">Wednesday, April 28, 2024</div>
+                            <div class="delivery-time">Morning (8:00 AM - 12:00 PM)</div>
+                            <span class="status-badge status-scheduled">Scheduled</span>
+                            <div class="delivery-items">
+                                <span>2 x 5-Gallon Bottles</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card quick-order-card">
+                        <div class="card-body">
+                            <i class="fas fa-plus-circle"></i>
+                            <h3>Need water now?</h3>
+                            <p>Place a quick order for immediate delivery</p>
+                            <button class="btn btn-primary" onclick="window.location.href='order.html'">Quick Order</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Status Tracker -->
+                <div class="card order-tracker-card">
+                    <div class="card-header">
+                        <i class="fas fa-map-signs"></i>
+                        <h3>Current Order Status</h3>
+                        <span class="order-number">Order #1005</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="progress-tracker">
+                            <div class="progress-step completed">
+                                <div class="step-icon"><i class="fas fa-check"></i></div>
+                                <span>Pending</span>
+                            </div>
+                            <div class="progress-line completed"></div>
+                            <div class="progress-step completed">
+                                <div class="step-icon"><i class="fas fa-check"></i></div>
+                                <span>Confirmed</span>
+                            </div>
+                            <div class="progress-line active"></div>
+                            <div class="progress-step active">
+                                <div class="step-icon"><i class="fas fa-truck"></i></div>
+                                <span>Out for Delivery</span>
+                            </div>
+                            <div class="progress-line"></div>
+                            <div class="progress-step">
+                                <div class="step-icon"><i class="fas fa-box"></i></div>
+                                <span>Delivered</span>
+                            </div>
+                        </div>
+                        <div class="tracker-info">
+                            <p>Your order is <strong>Out for Delivery</strong></p>
+                            <p class="estimated-time">Estimated delivery by 11:30 AM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-shopping-bag"></i>
+                        <div>
+                            <span class="stat-value">12</span>
+                            <span class="stat-label">Orders This Month</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-sync-alt"></i>
+                        <div>
+                            <span class="stat-value">Active</span>
+                            <span class="stat-label">Subscription Status</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-tint"></i>
+                        <div>
+                            <span class="stat-value">24</span>
+                            <span class="stat-label">Bottles on Hand</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/store.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

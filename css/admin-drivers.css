@@ -1,0 +1,146 @@
+/* Admin Drivers Page Styles */
+.drivers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.driver-profile-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.driver-profile-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.driver-profile-card.off-duty {
+    opacity: 0.7;
+}
+
+.driver-avatar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--primary-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.status-dot {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid var(--white);
+}
+
+.status-dot.online { background: var(--success); }
+.status-dot.offline { background: var(--gray-400); }
+
+.driver-profile-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 4px;
+}
+
+.driver-role {
+    font-size: 13px;
+    color: var(--gray-500);
+    display: block;
+    margin-bottom: 16px;
+}
+
+.driver-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 12px;
+}
+
+.driver-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.driver-stat .stat-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+.driver-stat .stat-label {
+    font-size: 11px;
+    color: var(--gray-500);
+}
+
+.driver-status-badge {
+    display: inline-block;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.driver-status-badge.available {
+    background: var(--success-bg);
+    color: #065f46;
+}
+
+.driver-status-badge.on-route {
+    background: var(--warning-bg);
+    color: #92400e;
+}
+
+.driver-status-badge.busy {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.driver-status-badge.off-duty {
+    background: var(--gray-100);
+    color: var(--gray-500);
+}
+
+.driver-contact {
+    text-align: left;
+    margin-bottom: 16px;
+    font-size: 13px;
+}
+
+.driver-contact p {
+    margin-bottom: 4px;
+    color: var(--gray-600);
+}
+
+.driver-contact i {
+    width: 20px;
+    color: var(--gray-400);
+}
+
+.driver-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .drivers-grid {
+        grid-template-columns: 1fr;
+    }
+}

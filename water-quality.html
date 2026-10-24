@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro - Water Quality</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/water-quality.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-water"></i>
+                <span>AquaPro</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="water-quality.html" class="active">Water Quality</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="quality-hero">
+        <div class="container">
+            <h1>Our Water Quality Promise</h1>
+            <p>At AquaPro, we are committed to providing the safest, cleanest drinking water to every household in Catarman, Northern Samar. Our water undergoes rigorous filtration and regular testing to ensure it meets the highest standards.</p>
+        </div>
+    </section>
+
+    <!-- Filtration Process -->
+    <section class="filtration-process">
+        <div class="container">
+            <h2 class="section-title">Our Filtration Process</h2>
+            <p class="section-subtitle">Every drop goes through a 4-stage purification system</p>
+            
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3>Sediment Filtration</h3>
+                    <p>Removes large particles like sand, dirt, rust, and other suspended solids</p>
+                </div>
+                <div class="process-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Carbon Filtration</h3>
+                    <p>Eliminates chlorine, organic compounds, bad taste, and unpleasant odors</p>
+                </div>
+                <div class="process-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3>Reverse Osmosis</h3>
+                    <p>Removes up to 99% of dissolved salts, bacteria, and heavy metals</p>
+                </div>
+                <div class="process-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>UV Sterilization</h3>
+                    <p>Eliminates any remaining microorganisms for absolute purity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lab Results -->
+    <section class="lab-results">
+        <div class="container">
+            <h2 class="section-title">Latest Laboratory Test Results</h2>
+            <p class="section-subtitle">Tested on March 15, 2024 | Certificate #: WQ-2024-0315-001</p>
+            
+            <div class="table-container">
+                <table class="lab-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Result</th>
+                            <th>Acceptable Standard</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pH Level</td>
+                            <td>7.2</td>
+                            <td>6.5 - 8.5</td>
+                            <td><span class="badge badge-pass">Passed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Total Dissolved Solids (TDS)</td>
+                            <td>85 mg/L</td>
+                            <td>&lt; 500 mg/L</td>
+                            <td><span class="badge badge-pass">Passed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Total Coliform</td>
+                            <td>&lt; 1.1 MPN/100mL</td>
+                            <td>&lt; 1.1 MPN/100mL</td>
+                            <td><span class="badge badge-pass">Passed</span></td>
+                        </tr>
+                        <tr>
+                            <td>E. coli</td>
+                            <td>Not Detected</td>
+                            <td>Not Detected</td>
+                            <td><span class="badge badge-pass">Passed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Lead (Pb)</td>
+                            <td>&lt; 0.001 mg/L</td>
+                            <td>&lt; 0.01 mg/L</td>
+                            <td><span class="badge badge-pass">Passed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Arsenic (As)</td>
+                            <td>&lt; 0.001 mg/L</td>
+                            <td>&lt; 0.01 mg/L</td>
+                            <td><span class="badge badge-pass">Passed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Turbidity</td>
+                            <td>0.5 NTU</td>
+                            <td>&lt; 5 NTU</td>
+                            <td><span class="badge badge-pass">Passed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="lab-actions">
+                <button class="btn btn-primary">
+                    <i class="fas fa-download"></i> Download Full Report
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Assurance -->
+    <section class="quality-assurance">
+        <div class="container">
+            <h2 class="section-title">Quality You Can Trust</h2>
+            <div class="assurance-grid">
+                <div class="assurance-card">
+                    <i class="fas fa-flask"></i>
+                    <h3>Monthly Testing</h3>
+                    <p>We test our water quality every month at a DOH-accredited laboratory</p>
+                </div>
+                <div class="assurance-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>DOH Compliant</h3>
+                    <p>Our stations comply with Philippine National Standards for Drinking Water (PNSDW)</p>
+                </div>
+                <div class="assurance-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Daily Monitoring</h3>
+                    <p>Our staff performs daily in-house water quality checks before delivery</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 AquaPro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/site.js"></script>
+    </script>
+</body>
+</html>

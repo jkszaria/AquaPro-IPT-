@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro - Track Delivery</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/customer-orders.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-water"></i>
+                <span>AquaPro</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+                    <li><a href="order.html"><i class="fas fa-shopping-cart"></i><span>Place Order</span></a></li>
+                    <li><a href="subscription.html"><i class="fas fa-sync-alt"></i><span>Order Preferences</span></a></li>
+                    <li class="active"><a href="tracking.html"><i class="fas fa-truck"></i><span>Track Delivery</span></a></li>
+                    <li><a href="order-history.html"><i class="fas fa-th-large"></i><span>Order History</span></a></li>
+                  
+                    <li><a href="profile.html"><i class="fas fa-user"></i><span>My Profile</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a class="logout-btn" href="login.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Track Your Delivery</h1>
+                    <p>Order #1005 - Placed on April 27, 2024</p>
+                </div>
+            </header>
+
+            <div class="tracking-container">
+                <!-- Progress Tracker -->
+                <div class="card progress-card">
+                    <div class="progress-tracker-large">
+                        <div class="progress-step completed">
+                            <div class="step-circle">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="step-info">
+                                <strong>Order Placed</strong>
+                                <span>Your order has been received</span>
+                            </div>
+                            <div class="step-time">April 27, 10:30 AM</div>
+                        </div>
+                        <div class="progress-connector completed"></div>
+                        
+                        <div class="progress-step completed">
+                            <div class="step-circle">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="step-info">
+                                <strong>Confirmed</strong>
+                                <span>Order confirmed by station</span>
+                            </div>
+                            <div class="step-time">April 27, 10:35 AM</div>
+                        </div>
+                        <div class="progress-connector active"></div>
+                        
+                        <div class="progress-step active">
+                            <div class="step-circle pulse">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="step-info">
+                                <strong>Out for Delivery</strong>
+                                <span>Driver is on the way</span>
+                            </div>
+                            <div class="step-time">April 28, 9:15 AM</div>
+                        </div>
+                        <div class="progress-connector"></div>
+                        
+                        <div class="progress-step">
+                            <div class="step-circle">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="step-info">
+                                <strong>Delivered</strong>
+                                <span>Water successfully delivered</span>
+                            </div>
+                            <div class="step-time">Pending</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Info & Map -->
+                <div class="delivery-details-grid">
+                    <!-- Map Placeholder -->
+                    <div class="card map-card">
+                        <div class="map-placeholder">
+                            <div class="map-content">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>Your Location: Brgy. Acacia, Catarman</p>
+                                <p class="map-note">Driver is approximately 1.5 km away</p>
+                                <div class="map-pin"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Info -->
+                    <div class="card delivery-info-card">
+                        <div class="card-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h3>Delivery Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-row">
+                                <span class="info-label">Driver</span>
+                                <span class="info-value">Roberto</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Estimated Arrival</span>
+                                <span class="info-value highlight">11:30 AM</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Delivery Address</span>
+                                <span class="info-value">#123 Main St., Brgy. Acacia, Catarman</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Payment Method</span>
+                                <span class="info-value">Cash on Delivery</span>
+                            </div>
+                            <button class="btn btn-primary btn-full" id="contact-station">
+                                <i class="fas fa-phone"></i> Contact Station
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Details -->
+                <div class="card order-details-card">
+                    <div class="card-header">
+                        <i class="fas fa-receipt"></i>
+                        <h3>Order Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="order-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>5-Gallon Bottle</td>
+                                    <td>2</td>
+                                    <td>₱35.00</td>
+                                    <td>₱70.00</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">Subtotal</td>
+                                    <td>₱70.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Delivery Fee</td>
+                                    <td>₱20.00</td>
+                                </tr>
+                                <tr class="total-row">
+                                    <td colspan="3">Total</td>
+                                    <td>₱90.00</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/store.js"></script>
+    <script src="js/tracking.js"></script>
+</body>
+</html>

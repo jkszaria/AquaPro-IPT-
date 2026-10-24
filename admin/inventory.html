@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro - Inventory Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/inventory.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<body>
+    <div class="app-container">
+        <!-- Admin Sidebar -->
+        <aside class="sidebar admin-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-water"></i>
+                <span>AquaPro Admin</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="admin.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+                    <li><a href="admin-orders.html"><i class="fas fa-clipboard-list"></i><span>Orders</span></a></li>
+                    <li><a href="delivery-management.html"><i class="fas fa-truck"></i><span>Deliveries</span></a></li>
+                    <li><a href="admin-drivers.html"><i class="fas fa-users"></i><span>Drivers</span></a></li>
+                    <li><a href="admin-customers.html"><i class="fas fa-address-book"></i><span>Customers</span></a></li>
+                    <li class="active"><a href="inventory.html"><i class="fas fa-boxes"></i><span>Inventory</span></a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i><span>Reports</span></a></li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                    <li class="logout-item"><a href="../login.html"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content admin-main">
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1>Inventory Management</h1>
+                    <p>Track bottles, containers, and stock levels</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="log-new-bottle">
+                        <i class="fas fa-plus"></i> Log New Bottle
+                    </button>
+                    <button class="btn btn-outline" id="record-return">
+                        <i class="fas fa-undo"></i> Record Return
+                    </button>
+                </div>
+            </header>
+
+            <!-- Low Stock Warning -->
+            <div class="warning-banner" id="low-stock-warning" style="display: flex;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Low Stock Alert: Only 8 filled bottles remaining for delivery! <a href="#">Restock now</a></span>
+                <button class="warning-close" onclick="this.parentElement.style.display='none'">&times;</button>
+            </div>
+
+            <div class="inventory-dashboard">
+                <!-- Summary Cards -->
+                <div class="stat-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fas fa-boxes"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value">150</span>
+                            <span class="stat-label">Total in Circulation</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gray"><i class="fas fa-box"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value">42</span>
+                            <span class="stat-label">Empty Bottles</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value">95</span>
+                            <span class="stat-label">Filled & Ready</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red"><i class="fas fa-trash"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value">13</span>
+                            <span class="stat-label">Damaged</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search and Filter -->
+                <div class="table-toolbar">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search by Bottle ID or QR Code...">
+                    </div>
+                    <select class="filter-select">
+                        <option value="">All Status</option>
+                        <option value="in-stock">In Stock</option>
+                        <option value="with-customer">With Customer</option>
+                        <option value="with-driver">With Driver</option>
+                        <option value="damaged">Damaged</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">All Types</option>
+                        <option value="5-gallon">5-Gallon Bottle</option>
+                        <option value="round">Round Container</option>
+                        <option value="slim">Slim Container</option>
+                    </select>
+                </div>
+
+                <!-- Bottle Inventory Table -->
+                <div class="card">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Bottle ID</th>
+                                    <th>QR Code</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Last Movement</th>
+                                    <th>Associated</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>BTL-001</strong></td>
+                                    <td><code>QR-AF001</code></td>
+                                    <td>5-Gallon</td>
+                                    <td><span class="status-badge status-in-stock">In Stock</span></td>
+                                    <td>Apr 27, 2024</td>
+                                    <td>—</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="btn btn-sm btn-primary" title="View"><i class="fas fa-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline" title="Edit"><i class="fas fa-edit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>BTL-002</strong></td>
+                                    <td><code>QR-AF002</code></td>
+                                    <td>5-Gallon</td>
+                                    <td><span class="status-badge status-with-customer">With Customer</span></td>
+                                    <td>Apr 26, 2024</td>
+                                    <td>Juan Dela Cruz</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="btn btn-sm btn-primary" title="View"><i class="fas fa-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline" title="Edit"><i class="fas fa-edit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>BTL-003</strong></td>
+                                    <td><code>QR-AF003</code></td>
+                                    <td>Round</td>
+                                    <td><span class="status-badge status-with-driver">With Driver</span></td>
+                                    <td>Apr 28, 2024</td>
+                                    <td>Roberto (Driver)</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="btn btn-sm btn-primary" title="View"><i class="fas fa-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline" title="Edit"><i class="fas fa-edit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>BTL-004</strong></td>
+                                    <td><code>QR-AF004</code></td>
+                                    <td>Slim</td>
+                                    <td><span class="status-badge status-in-stock">In Stock</span></td>
+                                    <td>Apr 25, 2024</td>
+                                    <td>—</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="btn btn-sm btn-primary" title="View"><i class="fas fa-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline" title="Edit"><i class="fas fa-edit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>BTL-005</strong></td>
+                                    <td><code>QR-AF005</code></td>
+                                    <td>5-Gallon</td>
+                                    <td><span class="status-badge status-damaged">Damaged</span></td>
+                                    <td>Apr 20, 2024</td>
+                                    <td>—</td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="btn btn-sm btn-primary" title="View"><i class="fas fa-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline" title="Edit"><i class="fas fa-edit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-pagination">
+                        <span>Showing 1-5 of 150 entries</span>
+                        <div class="pagination-buttons">
+                            <button class="btn btn-sm" disabled>Previous</button>
+                            <button class="btn btn-sm active">1</button>
+                            <button class="btn btn-sm">2</button>
+                            <button class="btn btn-sm">3</button>
+                            <button class="btn btn-sm">...</button>
+                            <button class="btn btn-sm">30</button>
+                            <button class="btn btn-sm">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/store.js"></script>
+    <script src="../js/inventory.js"></script>
+</body>
+</html>

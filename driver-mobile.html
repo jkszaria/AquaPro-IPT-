@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AquaPro Driver</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/driver-mobile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="driver-app">
+    <div class="driver-container">
+        <!-- Driver Header -->
+        <header class="driver-header">
+            <div class="header-top">
+                <div class="driver-greeting">
+                    <i class="fas fa-user-circle"></i>
+                    <div>
+                        <h1>Good morning, Roberto</h1>
+                        <span class="driver-status-text">On Duty • 3 of 5 deliveries completed</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="route-summary">
+                <div class="route-stat">
+                    <i class="fas fa-route"></i>
+                    <span>Optimized Route</span>
+                </div>
+                <div class="route-stat">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>5 stops</span>
+                </div>
+                <div class="route-stat">
+                    <i class="fas fa-clock"></i>
+                    <span>~2.5 hours</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Deliveries List -->
+        <div class="deliveries-container">
+            <h2>Today's Deliveries</h2>
+            
+            <!-- Active Delivery -->
+            <div class="delivery-card active">
+                <div class="delivery-header">
+                    <span class="stop-number">Stop 1 of 5</span>
+                    <span class="delivery-status status-active">In Progress</span>
+                </div>
+                <div class="delivery-body">
+                    <h3>Juan Dela Cruz</h3>
+                    <p class="address">
+                        <i class="fas fa-map-marker-alt"></i>
+                        #123 Main St., Brgy. Acacia, Catarman
+                    </p>
+                    <div class="items">
+                        <span class="item-tag">2 x 5-Gallon Bottles</span>
+                    </div>
+                    <div class="customer-contact">
+                        <a href="tel:09123456789" class="call-btn">
+                            <i class="fas fa-phone"></i> Call Customer
+                        </a>
+                    </div>
+                </div>
+                <div class="delivery-actions">
+                    <button class="action-btn delivered-btn">
+                        <i class="fas fa-check-circle"></i> Mark as Delivered
+                    </button>
+                    <button class="action-btn unavailable-btn">
+                        <i class="fas fa-user-times"></i> Customer Not Available
+                    </button>
+                    <button class="action-btn photo-btn">
+                        <i class="fas fa-camera"></i> Take Delivery Photo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upcoming Delivery -->
+            <div class="delivery-card upcoming">
+                <div class="delivery-header">
+                    <span class="stop-number">Stop 2 of 5</span>
+                    <span class="delivery-status status-upcoming">Upcoming</span>
+                </div>
+                <div class="delivery-body">
+                    <h3>Maria Santos</h3>
+                    <p class="address">
+                        <i class="fas fa-map-marker-alt"></i>
+                        #456 Beach Rd., Brgy. Baybay, Catarman
+                    </p>
+                    <div class="items">
+                        <span class="item-tag">3 x Round Containers</span>
+                    </div>
+                </div>
+                <button class="start-delivery-btn">
+                    <i class="fas fa-play"></i> Start Delivery
+                </button>
+            </div>
+
+            <!-- More Upcoming -->
+            <div class="delivery-card upcoming">
+                <div class="delivery-header">
+                    <span class="stop-number">Stop 3 of 5</span>
+                    <span class="delivery-status status-upcoming">Upcoming</span>
+                </div>
+                <div class="delivery-body">
+                    <h3>Ana Cruz</h3>
+                    <p class="address">
+                        <i class="fas fa-map-marker-alt"></i>
+                        #789 Washington Ave., Brgy. Washington, Catarman
+                    </p>
+                    <div class="items">
+                        <span class="item-tag">2 x Slim Containers</span>
+                    </div>
+                </div>
+                <button class="start-delivery-btn">
+                    <i class="fas fa-play"></i> Start Delivery
+                </button>
+            </div>
+
+            <!-- Completed Deliveries -->
+            <div class="completed-section">
+                <h3 class="section-toggle" onclick="toggleCompleted()">
+                    <i class="fas fa-check-double"></i> Completed (2)
+                    <i class="fas fa-chevron-down"></i>
+                </h3>
+                <div class="completed-list" id="completed-list">
+                    <div class="delivery-card completed">
+                        <div class="delivery-header">
+                            <span class="stop-number">Stop 1</span>
+                            <span class="delivery-status status-completed">Completed</span>
+                        </div>
+                        <div class="delivery-body">
+                            <h3>Pedro Reyes</h3>
+                            <p class="address">Brgy. Rizal, Catarman</p>
+                            <p class="completed-time">Delivered at 9:30 AM</p>
+                        </div>
+                    </div>
+                    <div class="delivery-card completed">
+                        <div class="delivery-header">
+                            <span class="stop-number">Stop 2</span>
+                            <span class="delivery-status status-completed">Completed</span>
+                        </div>
+                        <div class="delivery-body">
+                            <h3>Jose Garcia</h3>
+                            <p class="address">Brgy. Cervantes, Catarman</p>
+                            <p class="completed-time">Delivered at 10:15 AM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/store.js"></script>
+    <script src="js/driver-mobile.js"></script>
+</body>
+</html>

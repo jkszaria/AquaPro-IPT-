@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro - Orders Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/admin-customer-orders.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Admin Sidebar -->
+        <aside class="sidebar admin-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-water"></i>
+                <span>AquaPro Admin</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="admin.html">
+                            <i class="fas fa-th-large"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="admin-orders.html">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Orders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="delivery-management.html">
+                            <i class="fas fa-truck"></i>
+                            <span>Deliveries</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-drivers.html">
+                            <i class="fas fa-users"></i>
+                            <span>Drivers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-customers.html">
+                            <i class="fas fa-address-book"></i>
+                            <span>Customers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inventory.html">
+                            <i class="fas fa-boxes"></i>
+                            <span>Inventory</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-reports.html">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Reports</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li class="logout-item">
+                        <a href="../login.html">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <span class="station-name">Aqua Fresh Station</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content admin-main">
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1>Orders Management</h1>
+                    <p>View and manage all customer orders</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="openNewOrderModal()">
+                        <i class="fas fa-plus"></i> New Order
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filters & Search -->
+            <div class="filters-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search by Order ID, Customer Name...">
+                </div>
+                <select class="filter-select">
+                    <option value="">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="delivering">Out for Delivery</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">All Dates</option>
+                    <option value="today">Today</option>
+                    <option value="yesterday">Yesterday</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">All Payment Methods</option>
+                    <option value="cod">Cash on Delivery</option>
+                </select>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="card">
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="select-all"></th>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Contact</th>
+                                <th>Address</th>
+                                <th>Items</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" class="order-check"></td>
+                                <td><strong>#1005</strong></td>
+                                <td>Juan Dela Cruz</td>
+                                <td>0912-345-6789</td>
+                                <td>Brgy. Acacia</td>
+                                <td>2 x 5 Gal</td>
+                                <td>₱90.00</td>
+                                <td>Apr 28, 2024</td>
+                                <td><span class="status-badge status-delivering">Out for Delivery</span></td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn btn-sm btn-primary" title="View Details"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Update Status"><i class="fas fa-check"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Print Receipt"><i class="fas fa-print"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="order-check"></td>
+                                <td><strong>#1004</strong></td>
+                                <td>Maria Santos</td>
+                                <td>0923-456-7890</td>
+                                <td>Brgy. Baybay</td>
+                                <td>3 x Round</td>
+                                <td>₱110.00</td>
+                                <td>Apr 27, 2024</td>
+                                <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn btn-sm btn-primary" title="View Details"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Update Status"><i class="fas fa-check"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Print Receipt"><i class="fas fa-print"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="order-check"></td>
+                                <td><strong>#1003</strong></td>
+                                <td>Pedro Reyes</td>
+                                <td>0934-567-8901</td>
+                                <td>Brgy. Rizal</td>
+                                <td>1 x 5 Gal</td>
+                                <td>₱55.00</td>
+                                <td>Apr 27, 2024</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn btn-sm btn-primary" title="View Details"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Update Status"><i class="fas fa-check"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Print Receipt"><i class="fas fa-print"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="order-check"></td>
+                                <td><strong>#1002</strong></td>
+                                <td>Ana Cruz</td>
+                                <td>0945-678-9012</td>
+                                <td>Brgy. Washington</td>
+                                <td>2 x Slim</td>
+                                <td>₱70.00</td>
+                                <td>Apr 26, 2024</td>
+                                <td><span class="status-badge status-delivered">Delivered</span></td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn btn-sm btn-primary" title="View Details"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Print Receipt"><i class="fas fa-print"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="order-check"></td>
+                                <td><strong>#1001</strong></td>
+                                <td>Jose Garcia</td>
+                                <td>0956-789-0123</td>
+                                <td>Brgy. Cervantes</td>
+                                <td>4 x 5 Gal</td>
+                                <td>₱160.00</td>
+                                <td>Apr 26, 2024</td>
+                                <td><span class="status-badge status-delivered">Delivered</span></td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn btn-sm btn-primary" title="View Details"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline" title="Print Receipt"><i class="fas fa-print"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <div class="bulk-actions">
+                        <button class="btn btn-sm btn-outline" disabled>Bulk Update Status</button>
+                        <button class="btn btn-sm btn-outline" disabled>Bulk Print</button>
+                    </div>
+                    <div class="table-pagination">
+                        <span>Showing 1-5 of 50 entries</span>
+                        <div class="pagination-buttons">
+                            <button class="btn btn-sm" disabled>Previous</button>
+                            <button class="btn btn-sm active">1</button>
+                            <button class="btn btn-sm">2</button>
+                            <button class="btn btn-sm">3</button>
+                            <button class="btn btn-sm">...</button>
+                            <button class="btn btn-sm">10</button>
+                            <button class="btn btn-sm">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- New Order Modal -->
+    <div class="modal" id="new-order-modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h2>New Order</h2>
+                <button class="modal-close" onclick="closeNewOrderModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Customer</label>
+                        <select>
+                            <option>Select customer...</option>
+                            <option>Juan Dela Cruz</option>
+                            <option>Maria Santos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery Date</label>
+                        <input type="date">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Product</label>
+                        <select>
+                            <option>5-Gallon Bottle</option>
+                            <option>Round Container</option>
+                            <option>Slim Container</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" value="1" min="1">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeNewOrderModal()">Cancel</button>
+                <button class="btn btn-primary">Create Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/store.js"></script>
+    <script src="../js/admin-orders.js"></script>
+</body>
+</html>

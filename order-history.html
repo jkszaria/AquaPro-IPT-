@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro - Order History</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/customer-orders.css">
+    <link rel="stylesheet" href="css/customer-account.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-water"></i>
+                <span>AquaPro</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+                    <li><a href="order.html"><i class="fas fa-shopping-cart"></i><span>Place Order</span></a></li>
+                    
+                    <li><a href="subscription.html"><i class="fas fa-sync-alt"></i><span>Order Preferences</span></a></li>
+                    <li><a href="tracking.html"><i class="fas fa-truck"></i><span>Track Delivery</span></a></li>
+                    
+                    <li class="active"><a href="order-history.html"><i class="fas fa-sync-alt"></i><span>Order History</span></a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i><span>My Profile</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a class="logout-btn" href="login.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Order History</h1>
+                    <p>View and manage all your past water orders</p>
+                </div>
+                <div class="header-right">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">1</span>
+                    </div>
+                    <div class="user-avatar dropdown">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%233b82f6'/%3E%3Ctext x='20' y='26' text-anchor='middle' fill='white' font-size='16'%3EJD%3C/text%3E%3C/svg%3E" alt="User" onclick="toggleUserMenu()">
+                        <div class="dropdown-menu" id="user-dropdown">
+                            <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+                            <a href="#" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="history-container">
+                <!-- Search and Filter Bar -->
+                <div class="history-toolbar">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-orders" placeholder="Search by Order ID or Item...">
+                    </div>
+                    <div class="filter-group">
+                        <select id="status-filter">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="delivering">Out for Delivery</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                        <select id="date-filter">
+                            <option value="">All Time</option>
+                            <option value="7days">Last 7 Days</option>
+                            <option value="30days">Last 30 Days</option>
+                            <option value="90days">Last 3 Months</option>
+                            <option value="year">This Year</option>
+                        </select>
+                        <button class="btn btn-outline" onclick="exportHistory()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Summary -->
+                <div class="history-stats">
+                    <div class="history-stat-card">
+                        <i class="fas fa-shopping-bag"></i>
+                        <div>
+                            <span class="stat-value">47</span>
+                            <span class="stat-label">Total Orders</span>
+                        </div>
+                    </div>
+                    <div class="history-stat-card">
+                        <i class="fas fa-tint"></i>
+                        <div>
+                            <span class="stat-value">82</span>
+                            <span class="stat-label">Bottles Ordered</span>
+                        </div>
+                    </div>
+                    <div class="history-stat-card">
+                        <i class="fas fa-peso-sign"></i>
+                        <div>
+                            <span class="stat-value">₱3,290</span>
+                            <span class="stat-label">Total Spent</span>
+                        </div>
+                    </div>
+                    <div class="history-stat-card">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <span class="stat-value">Most Ordered</span>
+                            <span class="stat-label">5-Gallon Bottle</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-list"></i> All Orders</h3>
+                        <span class="order-count">Showing 47 orders</span>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Date</th>
+                                    <th>Items</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Payment</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Order rows will be populated here -->
+                                <tr>
+                                    <td><strong>#1005</strong></td>
+                                    <td>Apr 27, 2024</td>
+                                    <td>2 x 5-Gallon Bottle</td>
+                                    <td>₱90.00</td>
+                                    <td><span class="status-badge status-delivered">Delivered</span></td>
+                                    <td>Cash on Delivery</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-outline" onclick="viewOrderDetails(1005)" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline" onclick="downloadReceipt(1005)" title="Download Receipt">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline" onclick="reorderItems(1005)" title="Reorder">
+                                                <i class="fas fa-redo"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#1004</strong></td>
+                                    <td>Apr 24, 2024</td>
+                                    <td>3 x Round Container</td>
+                                    <td>₱110.00</td>
+                                    <td><span class="status-badge status-delivered">Delivered</span></td>
+                                    <td>Cash on Delivery</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-outline" onclick="viewOrderDetails(1004)">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline" onclick="downloadReceipt(1004)">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline" onclick="reorderItems(1004)">
+                                                <i class="fas fa-redo"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#1003</strong></td>
+                                    <td>Apr 20, 2024</td>
+                                    <td>1 x Slim Container, 2 x 5-Gallon</td>
+                                    <td>₱115.00</td>
+                                    <td><span class="status-badge status-delivered">Delivered</span></td>
+                                    <td>Cash on Delivery</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-outline" onclick="viewOrderDetails(1003)">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline" onclick="downloadReceipt(1003)">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline" onclick="reorderItems(1003)">
+                                                <i class="fas fa-redo"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#1002</strong></td>
+                                    <td>Apr 15, 2024</td>
+                                    <td>2 x 5-Gallon Bottle</td>
+                                    <td>₱90.00</td>
+                                    <td><span class="status-badge status-cancelled">Cancelled</span></td>
+                                    <td>—</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-outline" onclick="viewOrderDetails(1002)">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline" onclick="reorderItems(1002)">
+                                                <i class="fas fa-redo"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#1001</strong></td>
+                                    <td>Apr 10, 2024</td>
+                                    <td>4 x 5-Gallon Bottle</td>
+                                    <td>₱160.00</td>
+                                    <td><span class="status-badge status-delivered">Delivered</span></td>
+                                    <td>Cash on Delivery</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-outline" onclick="viewOrderDetails(1001)">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline" onclick="downloadReceipt(1001)">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline" onclick="reorderItems(1001)">
+                                                <i class="fas fa-redo"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="table-pagination">
+                        <span>Showing 1-5 of 47 entries</span>
+                        <div class="pagination-buttons">
+                            <button class="btn btn-sm" disabled>Previous</button>
+                            <button class="btn btn-sm active">1</button>
+                            <button class="btn btn-sm">2</button>
+                            <button class="btn btn-sm">3</button>
+                            <button class="btn btn-sm">...</button>
+                            <button class="btn btn-sm">10</button>
+                            <button class="btn btn-sm">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Rating Cards -->
+                <div class="recent-orders-ratings">
+                    <h3>Rate Recent Deliveries</h3>
+                    <div class="rating-cards">
+                        <div class="rating-card">
+                            <div class="rating-order-info">
+                                <strong>Order #1005</strong>
+                                <span>Delivered Apr 27, 2024</span>
+                                <span>2 x 5-Gallon Bottle</span>
+                            </div>
+                            <div class="star-rating" data-order="1005">
+                                <i class="far fa-star" data-rating="1"></i>
+                                <i class="far fa-star" data-rating="2"></i>
+                                <i class="far fa-star" data-rating="3"></i>
+                                <i class="far fa-star" data-rating="4"></i>
+                                <i class="far fa-star" data-rating="5"></i>
+                            </div>
+                            <textarea placeholder="Add a review (optional)..." rows="2"></textarea>
+                            <button class="btn btn-primary btn-sm">Submit Rating</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div class="modal" id="order-details-modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Order Details</h2>
+                <button class="modal-close" onclick="closeOrderDetails()">&times;</button>
+            </div>
+            <div class="modal-body" id="order-details-content">
+                <!-- Filled by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeOrderDetails()">Close</button>
+                <button class="btn btn-primary" id="reorder-from-details">
+                    <i class="fas fa-redo"></i> Reorder
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/store.js"></script>
+    <script src="js/order-history.js"></script>
+</body>
+</html>
